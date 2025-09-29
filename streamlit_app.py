@@ -78,5 +78,16 @@ else:
 
 st.header("4. 실험 소감 및 메모")
 memo = st.text_area("실험 소감/메모를 작성하세요.")
+feedback = ""
+if st.button("소감 피드백 받기"):
+    if not memo.strip():
+        feedback = "소감 내용을 입력해 주세요."
+    elif len(memo) < 20:
+        feedback = "조금 더 구체적으로 작성해 보세요! 실험 과정, 느낀 점, 궁금한 점 등을 포함하면 좋아요."
+    elif any(word in memo for word in ["재미", "흥미", "유익", "어려움", "성공", "실패"]):
+        feedback = "실험에 대한 느낌과 경험이 잘 드러나 있어요! 구체적인 사례나 생각을 더 추가해도 좋아요."
+    else:
+        feedback = "좋은 소감입니다! 실험에서 새롭게 알게 된 점이나 앞으로의 궁금증도 적어보면 더 좋아요."
+    st.info(feedback)
 if memo:
     st.success("소감이 저장되었습니다!")
